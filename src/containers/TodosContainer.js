@@ -23,6 +23,16 @@ class TodosContainer extends React.Component {
     });
   }
 
+  // Provide a function to delete a todo on successful response
+  deleteTodo = (todo) => {
+    TodoModel.delete(todo).then((res) => {
+      let todos = this.state.todos.filter(function(todo) {
+        return todo._id !== res.data._id
+      });
+      this.setState({ todos });
+    })
+  }
+
   // Provide a function to create new todos
   createTodo = (todo) => {
     let newTodo = {
@@ -40,7 +50,10 @@ class TodosContainer extends React.Component {
   render() {
     return (
       <div className="todosContainer">
-        <TodosList todos={ this.state.todos } />
+        <TodosList 
+          todos={ this.state.todos } 
+          deleteTodo={ this.deleteTodo }
+        />
         <CreateTodoForm createTodo={ this.createTodo } />
       </div>
     )
