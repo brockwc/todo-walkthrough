@@ -4,7 +4,7 @@ class UpdateTodoForm extends Component {
   state = {
     todo: {
       _id: this.props.todo._id,
-      body: this.props.todo.body
+      body: this.props.todo.body,
     }
   }
 
@@ -21,9 +21,13 @@ class UpdateTodoForm extends Component {
     event.preventDefault();
     let todo = this.state.todo;
 
-    debugger;
-    this.props.updateTodo(todo, todo.body, todo._id);
-    this.setState({ todo: "" });
+    this.props.updateTodo(todo._id, todo);
+    this.setState({ 
+      todo: {
+        _id: this.props.todo._id,
+        body: ""
+      } 
+    });
   }
 
   render() {

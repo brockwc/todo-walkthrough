@@ -47,14 +47,14 @@ class TodosContainer extends React.Component {
     })
   }
 
-  updateTodo = (todo, todoBody, todoId) => {
+  updateTodo = (todoId, todoBody) => {
     function isUpdatedTodo(todo) {
       return todo._id === todoId;
     }
     TodoModel.update(todoId, todoBody).then((res) => {
       debugger;
       let todos = this.state.todos;
-      todos.find(isUpdatedTodo).body = todoBody.body;
+      todos.find(todo => isUpdatedTodo(todo)).body = todoBody.body;
       this.setState({ todos });
     })
   }
